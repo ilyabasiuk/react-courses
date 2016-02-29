@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import CommentList from './CommentList'
 import toggleOpen from './HOC/toggleOpen'
+import hint from './HOC/hint'
 import CSSTransition from 'react-addons-css-transition-group'
 require('./style.css')
 
@@ -47,10 +48,17 @@ class Article extends Component {
         )
     }
 
+    getHintText () {
+        return this.props.article.title;
+    }
+
     select(ev) {
         ev.preventDefault()
         this.props.select()
     }
 }
 
-export default toggleOpen(Article)
+export default hint(toggleOpen(Article), (props) => props.article.title + " (my hover)")
+//Question: можно ли сделать HOC hint применимым к любому компоненту не прибегая к передаче функции, а ,например,
+// чтобы он искал нужное свойсвто у родиетельского компоненета и именно его и отображал как текст хинта,
+// либо чтобы дергал функцию компоненента для получения текста хинта (вроде getHintText)?

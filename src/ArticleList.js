@@ -13,7 +13,7 @@ class ArticleList extends Component {
         const articles = this.props.articles.map((article) =>
             <li key={article.id}>
                 <Article article={article}
-                         select = {this.select(article.id).bind(this)}
+                         select = {this.select(article.id)}
                          selected = {this.state.selected.includes(article.id)}/>
             </li>
         )

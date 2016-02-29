@@ -1,0 +1,8 @@
+.hover-visible{
+	display: block;
+	background: grey;
+}
+
+.hover-hidden {
+	display: none;
+}
