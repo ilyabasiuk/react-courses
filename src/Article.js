@@ -16,6 +16,8 @@ class Article extends Component {
     }
 
     render() {
+        const hoverStyle = this.props.showTooltip ? "hover-visible" : "hover-hidden";
+        const text = this.getHintText()
         return (
             <div ref="container">
                 <a href = "#" onClick = {this.select.bind(this)} >select</a>
@@ -23,6 +25,7 @@ class Article extends Component {
                 <CSSTransition transitionName="example" transitionAppear={true} transitionAppearTimeout={500} transitionEnterTimeout={500} transitionLeaveTimeout={300}>
                 {this.getBody()}
                 </CSSTransition>
+                <span className={hoverStyle}> {text} </span>
             </div>
         )
     }

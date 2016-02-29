@@ -2,7 +2,7 @@ import React, {Component} from "react"
 import ReactDOM from "react-dom"
 require("./hint.css")
 
-export default function (CustomComponent, getHoverText) {
+export default function (CustomComponent) {
 	return class extends Component {
 		state = {
 			showTooltip: false
@@ -15,15 +15,7 @@ export default function (CustomComponent, getHoverText) {
 			//Question: можно ли в синтаксисе jsx навесить эти обработчики ?
 		}
 		render () {
-			const text = getHoverText(this.props)
-			const hoverStyle = this.state.showTooltip ? "hover-visible" : "hover-hidden"
-
-			return (
-				<div>
-					<CustomComponent {...this.props}/>
-					<span className={hoverStyle}> {text} </span>
-				</div>
-			)
+			return <CustomComponent {...this.state} {...this.props} />
 		}
 		mouseenter () {
 			this.setState({
