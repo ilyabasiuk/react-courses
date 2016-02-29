@@ -7,13 +7,11 @@ require('./style.css')
 class Article extends Component {
     static propTypes = {
         article: PropTypes.object,
-
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func
     };
 
     componentDidMount() {
-        console.log('---', this.refs.container);
     }
 
     render() {
@@ -21,8 +19,8 @@ class Article extends Component {
             <div ref="container">
                 <a href = "#" onClick = {this.select.bind(this)} >select</a>
                 {this.getTitle()}
-                <CSSTransition transitionName="example" transitionAppear={true} transitionEnterTimeout={500} transitionLeaveTimeout={300}>
-                    {this.getBody()}
+                <CSSTransition transitionName="example" transitionAppear={true} transitionAppearTimeout={500} transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+                {this.getBody()}
                 </CSSTransition>
             </div>
         )
