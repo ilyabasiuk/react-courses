@@ -4,7 +4,8 @@ import CommentFrom from './CommentForm'
 
 class CommentList extends Component {
     static propTypes = {
-        comments: PropTypes.array
+        comments: PropTypes.array,
+        articleId: PropTypes.number
     };
 
     state = {
@@ -26,7 +27,7 @@ class CommentList extends Component {
     getCommentsBlock = () => {
         const { isOpen } = this.state
         const comments = this.props.comments.map((comment) => <li key={comment.id}><Comment comment = {comment}/></li>)
-        const form = <CommentFrom placeholder = "Type your comment"></CommentFrom>
+        const form = <CommentFrom articleId = {this.props.articleId} placeholder = "Type your comment"></CommentFrom>
 
         return isOpen ? (
             <div>
