@@ -25,11 +25,14 @@ class CommentForm extends Component {
 	}
 
 	handleSubmit = (e) => {
+		const {text} = this.state
 		e.preventDefault();
+		this.setState({text: ""})
 		addComment({
 			articleId: this.props.articleId,
-			text: this.state.text
+			text: text
 		})
+
 	}
 }
 
