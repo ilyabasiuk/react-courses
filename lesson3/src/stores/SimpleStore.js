@@ -33,6 +33,7 @@ class SimpleStore extends EventEmitter {
 
     add = (item) => {
         //!item.id && (item.id = Date.now() + Math.floor(Math.random() * 999999));
+        // хотелось бы оставить генерацию идишки сдесь , но тогда проблемно её получить в артикл строе для привязке к статье
         this.__items.push(new Model(item, this.__stores))
     }
 
