@@ -32,7 +32,7 @@ class SimpleStore extends EventEmitter {
     }
 
     add = (item) => {
-        !item.id && (item.id = Date.now());
+        //!item.id && (item.id = Date.now() + Math.floor(Math.random() * 999999));
         this.__items.push(new Model(item, this.__stores))
     }
 
