@@ -28,7 +28,7 @@ class CommentForm extends Component {
 		const {text} = this.state
 		e.preventDefault();
 		this.setState({text: ""})
-		addComment({
+		text && addComment({
 			articleId: this.props.articleId,
 			text: text
 		})
