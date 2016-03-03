@@ -32,6 +32,7 @@ class SimpleStore extends EventEmitter {
     }
 
     add = (item) => {
+        !item.id && (item.id = Date.now());
         this.__items.push(new Model(item, this.__stores))
     }
 
