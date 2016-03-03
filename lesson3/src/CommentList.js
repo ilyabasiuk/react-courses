@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import Comment from './Comment'
+import CommentFrom from './CommentForm'
 
 class CommentList extends Component {
     static propTypes = {
@@ -14,13 +15,25 @@ class CommentList extends Component {
         const { isOpen } = this.state
         const actionText = isOpen ? 'hide comments' : 'show comments'
 
-        const comments = this.props.comments.map((comment) => <li key={comment.id}><Comment comment = {comment}/></li>)
         return (
             <div>
                 <a href = "#" onClick = {this.toggleOpen}>{actionText}</a>
-                <ul>{isOpen ? comments : null}</ul>
+                {this.getCommentsBlock()}
             </div>
         )
+    }
+
+    getCommentsBlock = () => {
+        const { isOpen } = this.state
+        const comments = this.props.comments.map((comment) => <li key={comment.id}><Comment comment = {comment}/></li>)
+        const form = <CommentFrom></CommentFrom>
+
+        return isOpen ? (
+            <div>
+                <ul> {comments} </ul>
+                {form}
+            </div>
+        ) : null
     }
 
     toggleOpen = (ev) => {
