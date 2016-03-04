@@ -30,9 +30,7 @@ class CommentForm extends Component {
 		this.setState({text: ""})
 		text && addComment({
 			articleId: this.props.articleId,
-			text: text,
-			//лучше логику генерации id вынести в AC
-			id: Date.now()
+			text: text
 		})
 
 	}
