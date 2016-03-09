@@ -16,20 +16,20 @@ class CommentStore extends SimpleStore {
                     })
                     break;
                 case LOAD_ARTICLE_COMMENTS + _START:
-                    this.loading = true;
-                    var article = this.getArticle(data.id);
-                    article && (article.loadingComments = true);
+                    this.loading = true
+                    var article = this.getArticle(data.id)
+                    article && (article.loadingComments = true)
                     break
                 case LOAD_ARTICLE_COMMENTS + _FAIL:
-                    this.loading = false;
-                    var article = this.getArticle(data.id);
-                    article && (article.loadingComments = false);
+                    this.loading = false
+                    var article = this.getArticle(data.id)
+                    article && (article.loadingComments = false, article.commentsLoaded = true)
                     break
                 case LOAD_ARTICLE_COMMENTS + _SUCCESS:
-                    this.loading = false;
-                    var article = this.getArticle(data.id);
-                    article && (article.loadingComments = false);
-                    console.log(response);
+                    this.loading = false
+                    var article = this.getArticle(data.id)
+                    article && (article.loadingComments = false, article.commentsLoaded = true)
+                    response.records.forEach(this.add)
                     break
                 default: return
             }

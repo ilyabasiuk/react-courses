@@ -1,19 +1,22 @@
 import React, { Component, PropTypes } from 'react'
-import { articlesStore } from '../stores'
+import { articlesStore, commentStore } from '../stores'
 import ArticleList from './ArticleList'
 import { loadAllArticles } from './../actions/articles'
 
 class Container extends Component {
     state = {
-        articles: articlesStore.getOrLoadAll()
+        articles: articlesStore.getOrLoadAll(),
+        comments: commentStore.getAll()
     }
 
     componentDidMount() {
         articlesStore.addChangeListener(this.change)
+        commentStore.addChangeListener(this.change)
     }
 
     componentWillUnmount() {
         articlesStore.removeChangeListener(this.change)
+        commentStore.addChangeListener(this.change)
     }
 
     render() {
