@@ -16,8 +16,9 @@ class CommentList extends Component {
     }
 
     componentWillReceiveProps (newProps) {
+        const {id} = newProps.article
         if (newProps.article.getRelation('comments').every((comment) => !comment)) {
-            loadCommentsForArticle(newProps.article.id);
+            loadCommentsForArticle({id});
         }
     }
 
@@ -36,6 +37,7 @@ class CommentList extends Component {
     getBody() {
         const { article, isOpen } = this.props
         if (!isOpen) return null
+        debugger;
         if (article.loadingComments ) return <div><h2>Loading...</h2></div>
         const commentList = article.getRelation('comments').map(comment => <li key={comment.id}><Comment comment = {comment}/></li>)
         return (

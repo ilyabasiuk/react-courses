@@ -11,6 +11,10 @@ class SimpleStore extends EventEmitter {
         if (initialState) initialState.forEach(this.add)
     }
 
+    getStore(id) {
+        return this.__stores[id];
+    }
+
     emitChange() {
         this.emit(CHANGE_EVENT)
     }
