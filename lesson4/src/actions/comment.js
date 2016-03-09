@@ -1,6 +1,7 @@
 import AppDispatcher from '../dispatcher'
-import { ADD_COMMENT } from './constants'
+import { ADD_COMMENT, LOAD_ARTICLE_COMMENTS } from './constants'
 import { asyncAC } from './api/utils'
+import { loadCommentsByArticle } from './api/comment'
 
 export function addComment(text, articleId) {
     AppDispatcher.dispatch({
@@ -13,6 +14,4 @@ export function addComment(text, articleId) {
     })
 }
 
-export function loadCommentsForArticle (articleId) {
-    console.log("loadCommentsForArticle", articleId);
-}
+export const loadCommentsForArticle = asyncAC(LOAD_ARTICLE_COMMENTS, loadCommentsByArticle);
