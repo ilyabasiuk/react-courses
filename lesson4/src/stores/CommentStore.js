@@ -1,5 +1,5 @@
 import SimpleStore from './SimpleStore'
-import { ADD_COMMENT, LOAD_ARTICLE_COMMENTS, _START, _FAIL, _SUCCESS  } from '../actions/constants'
+import { ADD_COMMENT, LOAD_ARTICLE_COMMENTS, _START, _FAIL, _SUCCESS} from '../actions/constants'
 import AppDispatcher from '../dispatcher'
 
 class CommentStore extends SimpleStore {
@@ -16,19 +16,13 @@ class CommentStore extends SimpleStore {
                     })
                     break;
                 case LOAD_ARTICLE_COMMENTS + _START:
-                    this.loading = true
-                    var article = this.getArticle(data.id)
-                    article && (article.loadingComments = true)
+                    this.changeArticleState(data.id, true)
                     break
                 case LOAD_ARTICLE_COMMENTS + _FAIL:
-                    this.loading = false
-                    var article = this.getArticle(data.id)
-                    article && (article.loadingComments = false, article.commentsLoaded = true)
+                    this.changeArticleState(data.id, false, true)
                     break
                 case LOAD_ARTICLE_COMMENTS + _SUCCESS:
-                    this.loading = false
-                    var article = this.getArticle(data.id)
-                    article && (article.loadingComments = false, article.commentsLoaded = true)
+                    this.changeArticleState(data.id, false, true)
                     response.records.forEach(this.add)
                     break
                 default: return
@@ -39,8 +33,13 @@ class CommentStore extends SimpleStore {
     }
 
     getArticle(id) {
-        const articleStore = this.getStore("articles");
-        return articleStore && articleStore.getById(id);
+        const articleStore = this.getStore("articles")
+        return articleStore && articleStore.getById(id)
+    }
+
+    changeArticleState (id, loadingComments, commentsLoaded) {
+        const article = this.getArticle(id)
+        article && (article.loadingComments = loadingComments, article.commentsLoaded = commentsLoaded)
     }
 }
 
