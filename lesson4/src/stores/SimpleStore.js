@@ -33,6 +33,7 @@ class SimpleStore extends EventEmitter {
 
     add = (item) => {
         this.delete(item.id)
+        item.loadingComments = true;
         this.__items.push(new Model(item, this.__stores))
     }
 

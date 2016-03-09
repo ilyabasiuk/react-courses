@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import Comment from './Comment'
 import toggleOpen from './../HOC/toggleOpen'
-import { addComment } from './../actions/comment'
+import { addComment, loadCommentsForArticle } from './../actions/comment'
 
 class CommentList extends Component {
     static propTypes = {
@@ -13,6 +13,12 @@ class CommentList extends Component {
 
     state = {
         comment: ''
+    }
+
+    componentWillReceiveProps (newProps) {
+        if (newProps.article.getRelation('comments').every((comment) => !comment)) {
+            loadCommentsForArticle(newProps.article.id);
+        }
     }
 
     render() {
@@ -30,6 +36,7 @@ class CommentList extends Component {
     getBody() {
         const { article, isOpen } = this.props
         if (!isOpen) return null
+        if (article.loadingComments ) return <div><h2>Loading...</h2></div>
         const commentList = article.getRelation('comments').map(comment => <li key={comment.id}><Comment comment = {comment}/></li>)
         return (
             <div>
