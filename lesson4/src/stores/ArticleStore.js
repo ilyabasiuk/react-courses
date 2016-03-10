@@ -51,7 +51,6 @@ class ArticleStore extends SimpleStore {
 
                 default: return
             }
-
             this.emitChange()
         })
     }

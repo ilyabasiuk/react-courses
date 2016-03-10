@@ -21,7 +21,6 @@ class SimpleStore extends EventEmitter {
 
     addChangeListener(callback) {
         this.on(CHANGE_EVENT, function() {
-            debugger;
             callback();
         })
     }
@@ -46,7 +45,6 @@ class SimpleStore extends EventEmitter {
     delete(id) {
         this.__items = this.__items.filter(item => item.id != id)
     }
-=
 }
 
 export default SimpleStore

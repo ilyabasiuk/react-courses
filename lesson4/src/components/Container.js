@@ -5,6 +5,7 @@ import { loadAllArticles } from './../actions/articles'
 
 class Container extends Component {
     state = {
+        loading: true,
         articles: articlesStore.getOrLoadAll(),
         comments: commentStore.getAll()
     }
@@ -30,6 +31,7 @@ class Container extends Component {
     }
 
     change = () => {
+        console.log(articlesStore.loading)
         this.setState({
             loading: articlesStore.loading,
             articles: articlesStore.getAll()
