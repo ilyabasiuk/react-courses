@@ -15,14 +15,7 @@ class CommentStore extends SimpleStore {
                     this.add(tempComment)
                     break
                 case SAVE_COMMENT + _SUCCESS:
-                    const {text, user} = data
-                    const {id, timeStamp} = response
-                    const comment = {
-                        id,
-                        text,
-                        user,
-                        timeStamp
-                    }
+                    const comment = response
                     comment.loading = false
                     this.deleteByTempId(data.tempId)
                     this.add(comment)

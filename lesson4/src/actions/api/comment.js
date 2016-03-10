@@ -8,7 +8,9 @@ export function loadCommentsByArticle(article) {
 }
 
 export function save(comment) {
-    return $.post('/api/comment/', {
-        data: comment
+    return $.ajax('/api/comment/', {
+        method: "POST",
+        data: JSON.stringify(comment),
+        contentType: "application/json;charset=UTF-8"
     })
 }

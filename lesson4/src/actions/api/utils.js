@@ -3,7 +3,6 @@ import { _SUCCESS, _FAIL, _START } from '../constants'
 
 export function asyncAC(type, apiCall) {
     return function(data) {
-        console.log(data)
         AppDispatcher.dispatch({
             type: type + _START,
             data
