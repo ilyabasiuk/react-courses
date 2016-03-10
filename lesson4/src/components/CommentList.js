@@ -16,9 +16,9 @@ class CommentList extends Component {
     }
 
     componentWillReceiveProps (newProps) {
-        const {article} = newProps
+        const {article, isOpen} = newProps
         const {id} = article
-        if (!article.commentsLoaded && article.loadingComments !== true) {
+        if (isOpen && !article.commentsLoaded && article.loadingComments !== true) {
             loadCommentsForArticle({id});
         }
     }
