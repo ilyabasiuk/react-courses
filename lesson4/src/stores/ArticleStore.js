@@ -50,7 +50,6 @@ class ArticleStore extends SimpleStore {
                     break;
 
                 case LOAD_ARTICLE_COMMENTS + _START:
-                debugger;
                     this.changeArticleCommentsState(data.id, true)
                     break
                 case LOAD_ARTICLE_COMMENTS + _FAIL:
