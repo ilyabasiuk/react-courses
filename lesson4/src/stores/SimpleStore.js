@@ -20,7 +20,10 @@ class SimpleStore extends EventEmitter {
     }
 
     addChangeListener(callback) {
-        this.on(CHANGE_EVENT, callback)
+        this.on(CHANGE_EVENT, function() {
+            debugger;
+            callback();
+        })
     }
 
     removeChangeListener(callback) {
@@ -35,10 +38,6 @@ class SimpleStore extends EventEmitter {
         return this.__items.filter((item) => item.id == id)[0]
     }
 
-    getByTempId = (tempId) => {
-        return this.__items.filter((item) => item.tempId == tempId)[0]
-    }
-
     add = (item) => {
         this.delete(item.id)
         this.__items.push(new Model(item, this.__stores))
@@ -47,10 +46,7 @@ class SimpleStore extends EventEmitter {
     delete(id) {
         this.__items = this.__items.filter(item => item.id != id)
     }
-
-    deleteByTempId = (tempId) => {
-        this.__items = this.__items.filter(item => item.tempId != tempId)
-    }
+=
 }
 
 export default SimpleStore
