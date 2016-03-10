@@ -10,14 +10,14 @@ class CommentStore extends SimpleStore {
 
             switch (type) {
                 case SAVE_COMMENT + _START:
-                    const tempComment = data
+                    const tempComment =  Object.assign({}, data)
                     tempComment.loading = true
                     this.add(tempComment)
                     break
                 case SAVE_COMMENT + _SUCCESS:
                     const comment = response
                     comment.loading = false
-                    this.deleteByTempId(data.tempId)
+                    this.delete(data.id)
                     this.add(comment)
                     break
                 case LOAD_ARTICLE_COMMENTS + _START:

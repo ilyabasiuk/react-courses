@@ -13,10 +13,16 @@ class ArticleStore extends SimpleStore {
                 case DELETE_ARTICLE:
                     this.delete(data.id)
                     break
+                case SAVE_COMMENT + _START:
+                    AppDispatcher.waitFor([this.__stores.comments.dispatchToken])
+                    const art = this.getById(data.article);
+                    art.comments = (art.comments || []).concat(data.id);
+                    break
                 case SAVE_COMMENT + _SUCCESS:
                     AppDispatcher.waitFor([this.__stores.comments.dispatchToken])
                     const article = this.getById(data.article)
-                    article.comments = (article.comments || []).concat(response.id)
+                    article.comments = article.comments.filter((comId) => comId !== data.id)
+                    article.comments = article.comments.concat(response.id)
                     break
                 case LOAD_ALL_ARICLES + _START:
                     this.loading = true

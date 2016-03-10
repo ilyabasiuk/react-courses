@@ -6,7 +6,7 @@ import { loadCommentsByArticle, save } from './api/comment'
 export const saveComment = function (comment) {
     const data = comment
     data.user = comment.user || "Anonymous"
-    data.tempId = Date.now()
+    data.id = Date.now()
     asyncAC(SAVE_COMMENT, save)(data)
 }
 export const loadCommentsForArticle = asyncAC(LOAD_ARTICLE_COMMENTS, loadCommentsByArticle)
