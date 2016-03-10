@@ -1,5 +1,5 @@
 import SimpleStore from './SimpleStore'
-import { DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARICLES, LOAD_ARTICLE_BY_ID, SAVE_COMMENT, _START, _FAIL, _SUCCESS } from '../actions/constants'
+import { DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARICLES, LOAD_ARTICLE_BY_ID, SAVE_COMMENT, LOAD_ARTICLE_COMMENTS, _START, _FAIL, _SUCCESS } from '../actions/constants'
 import AppDispatcher from '../dispatcher'
 import { loadAllArticles } from '../actions/articles'
 
@@ -49,6 +49,16 @@ class ArticleStore extends SimpleStore {
                     this.add(response)
                     break;
 
+                case LOAD_ARTICLE_COMMENTS + _START:
+                debugger;
+                    this.changeArticleCommentsState(data.id, true)
+                    break
+                case LOAD_ARTICLE_COMMENTS + _FAIL:
+                    this.changeArticleCommentsState(data.id, false, true)
+                    break
+                case LOAD_ARTICLE_COMMENTS + _SUCCESS:
+                    this.changeArticleCommentsState(data.id, false, true)
+                    break
                 default: return
             }
             this.emitChange()
@@ -58,6 +68,11 @@ class ArticleStore extends SimpleStore {
     getOrLoadAll() {
         if (!this.loading && !this.loaded) loadAllArticles()
         return this.getAll()
+    }
+
+    changeArticleCommentsState(articleId, loadingComments, commentsLoaded) {
+        const article = this.getById(articleId)
+        article && (article.loadingComments = loadingComments, article.commentsLoaded = commentsLoaded)
     }
 }
 
