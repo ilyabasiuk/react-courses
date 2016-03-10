@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react'
 import CommentList from './CommentList'
 import CSSTransition from 'react-addons-css-transition-group'
 import withHint from './../HOC/withHint'
-import loader from './../HOC/loader'
 import { deleteArticle, loadArticleById } from './../actions/articles'
 require('./../style.css')
 
@@ -48,6 +47,7 @@ class Article extends Component {
     getBody() {
         if (!this.props.isOpen) return null
         const {article} = this.props
+        if (article.loading) return <div key="article!"><h2>Loading...</h2></div>
         return (
             <div key="article">
                 <a href="#" onClick = {this.handleDeleteArticle}>delete this article</a>
@@ -68,4 +68,4 @@ class Article extends Component {
     }
 }
 
-export default loader(withHint(Article), (props) => props.article.loading)
+export default withHint(Article)

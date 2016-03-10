@@ -31,7 +31,6 @@ class Container extends Component {
     }
 
     change = () => {
-        console.log(articlesStore.loading)
         this.setState({
             loading: articlesStore.loading,
             articles: articlesStore.getAll()
@@ -39,4 +38,4 @@ class Container extends Component {
     };
 }
 
-export default Container
+export default Container //loader(Container) - HOC не может получить доступ к стейту компонента? как быть в данном случае?

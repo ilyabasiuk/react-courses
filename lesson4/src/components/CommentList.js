@@ -65,13 +65,6 @@ class CommentList extends Component {
             comment: ''
         })
     }
-
-    toggleOpen = (ev) => {
-        ev.preventDefault()
-        this.setState({
-            isOpen: !this.state.isOpen
-        })
-    }
 }
 
 export default toggleOpen(CommentList)
