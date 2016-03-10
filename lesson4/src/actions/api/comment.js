@@ -6,3 +6,9 @@ export function loadCommentsByArticle(article) {
         data: { article : id }
     })
 }
+
+export function save(comment) {
+    return $.post('/api/comment/', {
+        data: comment
+    })
+}

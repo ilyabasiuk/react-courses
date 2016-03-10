@@ -6,9 +6,10 @@ class Comment extends Component {
     };
 
     render() {
+        const {comment} = this.props
         return (
             <div>
-                <p>{this.props.comment.text}</p>
+                <p>{comment.user} : {comment.text}</p>
             </div>
         )
     }

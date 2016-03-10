@@ -1,5 +1,5 @@
 import SimpleStore from './SimpleStore'
-import { ADD_COMMENT, LOAD_ARTICLE_COMMENTS, _START, _FAIL, _SUCCESS} from '../actions/constants'
+import { SAVE_COMMENT, LOAD_ARTICLE_COMMENTS, _START, _FAIL, _SUCCESS} from '../actions/constants'
 import AppDispatcher from '../dispatcher'
 
 class CommentStore extends SimpleStore {
@@ -9,12 +9,24 @@ class CommentStore extends SimpleStore {
             const { type, data, response } = action
 
             switch (type) {
-                case ADD_COMMENT:
-                    this.add({
-                        id: data.id,
-                        text: data.text
-                    })
-                    break;
+                case SAVE_COMMENT + _START:
+                    const tempComment = data
+                    tempComment.loading = true
+                    this.add(tempComment)
+                    break
+                case SAVE_COMMENT + _SUCCESS:
+                    const {text, user} = data
+                    const {id, timeStamp} = response
+                    const comment = {
+                        id,
+                        text,
+                        user,
+                        timeStamp
+                    }
+                    comment.loading = false
+                    this.deleteByTempId(data.tempId)
+                    this.add(comment)
+                    break
                 case LOAD_ARTICLE_COMMENTS + _START:
                     this.changeArticleState(data.id, true)
                     break
