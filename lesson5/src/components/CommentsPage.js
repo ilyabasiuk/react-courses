@@ -29,8 +29,10 @@ class CommentsPage extends Component {
     }
 
 
-    componentWillReceiveProps() {
-        console.log("will receive")
+    componentWillReceiveProps(props) {
+        if (!commentStore.loading) {
+            loadByParams(this.getQueryParamsByPageNo(props.params.pageNo))
+        }
     }
 
     render() {
