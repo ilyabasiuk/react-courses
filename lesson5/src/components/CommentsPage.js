@@ -1,7 +1,8 @@
-import React, {Component, PropTypes} from "react"
+import React, {Component} from "react"
 import {commentStore} from '../stores'
 import {loadCommentsByParams as loadByParams} from '../actions/comment'
 import Comment from './CommentEx'
+import Pager from './Pager'
 
 class CommentsPage extends Component {
     constructor(props) {
@@ -36,12 +37,18 @@ class CommentsPage extends Component {
         const {loading, total, comments} = this.state
         if (loading) return <h3>Loading...</h3>
         const list = comments.map((comment) => <li key={comment.id}><Comment comment={comment}/></li>)
+        console.log(this.changePage)
         return (
             <div>
                 <h1>Comments Page {this.props.params.pageNo} Total Commetns {total}</h1>
                 {list}
+                <Pager total={total} createLink={this.changePage}  perPage={this._commentsOnPage}></Pager>
             </div>
         )
+    }
+
+    changePage(pageNo) {
+        return `/comments/${pageNo}`
     }
 
     getQueryParamsByPageNo (pageNo) {
