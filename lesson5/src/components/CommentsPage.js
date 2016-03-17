@@ -6,17 +6,29 @@ class CommentsPage extends Component {
     constructor(props) {
         super()
         this.commentsOnPage = 10
-        this.state = {
-            comments: commentStore.getAll()
-        }
         loadByParams(this.getQueryParamsByPageNo(props.params.pageNo))
+        this.state = {
+            comments: commentStore.getAll(),
+            loading: commentStore.loading
+        }
     }
 
+    componentWillMount() {
+        commentStore.addChangeListener(this.change);
+    }
+
+    componentWillUnmount() {
+        commentStore.removeChangeListener(this.change);
+    }
+
+
     componentWillReceiveProps() {
-        console.log("wiil receive")
+        console.log("will receive")
     }
 
     render() {
+        const { loading } = this.state
+        if (loading) return <h3>Loading...</h3>
         return (
             <h1>Comments Page {this.props.params.pageNo}</h1>
         )
@@ -27,6 +39,13 @@ class CommentsPage extends Component {
             limit: this.commentsOnPage,
             offset: this.commentsOnPage * (pageNo -1)
         }
+    }
+
+    change = () => {
+        this.setState({
+            comments: commentStore.getAll(),
+            loading: commentStore.loading
+        })
     }
 }
 
