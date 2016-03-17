@@ -27,6 +27,7 @@ class CommentStore extends SimpleStore {
 
                 case LOAD_COMMENTS_BY_PARAMS + _SUCCESS:
                     this.loading = false
+                    this.deleteAll()
                     this._total = response.total
                     response.records.forEach(this.add)
                     break;
