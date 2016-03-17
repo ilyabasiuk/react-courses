@@ -1,15 +1,21 @@
 import React, {Component, PropTypes} from "react"
 import {commentStore} from '../stores'
 import {loadCommentsByParams as loadByParams} from '../actions/comment'
+import Comment from './CommentEx'
 
 class CommentsPage extends Component {
     constructor(props) {
         super()
-        this.commentsOnPage = 10
+        this._commentsOnPage = 10
         loadByParams(this.getQueryParamsByPageNo(props.params.pageNo))
-        this.state = {
+        this.state = this.createState()
+    }
+
+    createState () {
+        return {
             comments: commentStore.getAll(),
-            loading: commentStore.loading
+            loading: commentStore.loading,
+            total: commentStore.getTotal()
         }
     }
 
@@ -27,25 +33,26 @@ class CommentsPage extends Component {
     }
 
     render() {
-        const { loading } = this.state
+        const {loading, total, comments} = this.state
         if (loading) return <h3>Loading...</h3>
+        const list = comments.map((comment) => <li key={comment.id}><Comment comment={comment}/></li>)
         return (
-            <h1>Comments Page {this.props.params.pageNo}</h1>
+            <div>
+                <h1>Comments Page {this.props.params.pageNo} Total Commetns {total}</h1>
+                {list}
+            </div>
         )
     }
 
     getQueryParamsByPageNo (pageNo) {
         return {
-            limit: this.commentsOnPage,
-            offset: this.commentsOnPage * (pageNo -1)
+            limit: this._commentsOnPage,
+            offset: this._commentsOnPage * (pageNo -1)
         }
     }
 
     change = () => {
-        this.setState({
-            comments: commentStore.getAll(),
-            loading: commentStore.loading
-        })
+        this.setState(this.createState())
     }
 }
 

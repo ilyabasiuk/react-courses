@@ -5,6 +5,7 @@ import AppDispatcher from '../dispatcher'
 class CommentStore extends SimpleStore {
     constructor(...args) {
         super(...args)
+        this._total = 0
         this.dispatchToken = AppDispatcher.register((action) => {
             const { type, data, response } = action
 
@@ -26,12 +27,18 @@ class CommentStore extends SimpleStore {
 
                 case LOAD_COMMENTS_BY_PARAMS + _SUCCESS:
                     this.loading = false
+                    this._total = response.total
+                    response.records.forEach(this.add)
                     break;
                 default: return
             }
 
             this.emitChange()
         })
+    }
+
+    getTotal() {
+        return this._total
     }
 }
 
