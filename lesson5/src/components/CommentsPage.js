@@ -37,17 +37,16 @@ class CommentsPage extends Component {
         const {loading, total, comments} = this.state
         if (loading) return <h3>Loading...</h3>
         const list = comments.map((comment) => <li key={comment.id}><Comment comment={comment}/></li>)
-        console.log(this.changePage)
         return (
             <div>
                 <h1>Comments Page {this.props.params.pageNo} Total Commetns {total}</h1>
                 {list}
-                <Pager total={total} createLink={this.changePage}  perPage={this._commentsOnPage}></Pager>
+                <Pager total={total} createLink={this.createLink}  perPage={this._commentsOnPage}></Pager>
             </div>
         )
     }
 
-    changePage(pageNo) {
+    createLink(pageNo) {
         return `/comments/${pageNo}`
     }
 

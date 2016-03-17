@@ -11,7 +11,9 @@ class Pager extends Component {
     render () {
        const count = this.getCountPages()
        const btns = Array.apply(null, Array(count)).map((item, index) =>
-            <Link to={this.getLink(index + 1)} key={index}>{index + 1}</Link>)
+            <Link to={this.getLink(index + 1)} key={index}>
+                <button>{index + 1}</button>
+            </Link>)
        return (
             <div>
                 {btns}
