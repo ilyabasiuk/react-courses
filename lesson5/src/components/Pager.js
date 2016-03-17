@@ -6,6 +6,8 @@ class Pager extends Component {
         total: PropTypes.number,
         perPage: PropTypes.number,
         //createLink: PropTypes.function
+        // Получаю ошибку если раскоментить, непонятно почему :(
+        // - warning.js:45 Warning: Failed propType: Pager: prop type `createLink` is invalid; it must be a function, usually from React.PropTypes. Check the render method of `CommentsPage`.
     }
 
     render () {
