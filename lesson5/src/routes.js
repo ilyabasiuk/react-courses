@@ -15,7 +15,11 @@ export default (
             <Route path="/new" component = { NewArticlePage} />
             <Route path="/articles/:id" component = { ArticlePage } />
         </Route>
-        <Route path="/comments/:pageNo" component = {CommentsPage}/>
+        <Route path="/comments">
+            <IndexRedirect to="/comments/1" />
+            <Route path="/comments/:pageNo" component = {CommentsPage}></Route>
+        </Route>
+
         <Redirect from = "/:id" to="/articles/:id" />
         <Route path = "*" component = {NotFound} />
     </Router>
