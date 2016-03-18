@@ -13,7 +13,7 @@ class Pager extends Component {
     render () {
        const count = this.getCountPages()
        const btns = Array.apply(null, Array(count)).map((item, index) =>
-            <Link to={this.getLink(index + 1)} key={index}>
+            <Link to={this.getLink(index + 1)} key={index} activeClassName = "active">
                 <button>{index + 1}</button>
             </Link>)
        return (

@@ -24,3 +24,7 @@
     opacity: 1;
     transition: opacity .5s ease-in;
 }
+
+.active button {
+    color: #1a8bff;
+}
