@@ -39,6 +39,7 @@ class CommentsPage extends Component {
         const {loading, total, comments} = this.state
         let list = <h3>Loading...</h3>
         if (!loading) list = comments.map((comment) => <li key={comment.id}><Comment comment={comment}/></li>)
+
         return (
             <div>
                 <h1>Comments Page {this.props.params.pageNo} Total Commetns {total}</h1>
