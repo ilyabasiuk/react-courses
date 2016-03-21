@@ -77,7 +77,7 @@ class Container extends Component {
             </li>)
         return <div>
             <ul>{links}</ul>
-            <a href="#" onClick={this.handleNewClick}>create new article</a>
+            <a href="#" onClick={this.handleNewClick}>{this.tr("createArticle")}</a>
         </div>
     }
     handleNewClick = (ev) => {

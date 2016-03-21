@@ -11,12 +11,16 @@ class Article extends Component {
         toggleOpen: PropTypes.func
     };
 
-/*
-    shouldComponentUpdate(nextProps, nextState) {
-        console.log('---', arguments);
-        return this.props.article != nextProps.article
+    static contextTypes = {
+        tr: PropTypes.func
     }
-*/
+
+    /*
+        shouldComponentUpdate(nextProps, nextState) {
+            console.log('---', arguments);
+            return this.props.article != nextProps.article
+        }
+    */
 
     render() {
         return (
@@ -39,10 +43,11 @@ class Article extends Component {
 
     getBody() {
         const {article} = this.props
-        if (article.loading) return <div key="article!"><h2>Loading...</h2></div>
+        const {tr} = this.context
+        if (article.loading) return <div key="article!"><h2>{tr("Loading")}...</h2></div>
         return (
             <div key="article">
-                <a href="#" onClick = {this.handleDeleteArticle}>delete this article</a>
+                <a href="#" onClick = {this.handleDeleteArticle}>{tr("deleteArticle")}</a>
                 <p>{article.text}</p>
                 <CommentList article = {article}/>
             </div>

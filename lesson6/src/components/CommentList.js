@@ -13,7 +13,8 @@ class CommentList extends Component {
 
     static contextTypes = {
         router: PropTypes.object,
-        user: PropTypes.string
+        user: PropTypes.string,
+        tr: PropTypes.func
     }
 
     state = {
@@ -29,7 +30,8 @@ class CommentList extends Component {
 
     render() {
         const { isOpen, toggleOpen } = this.props
-        const actionText = isOpen ? 'hide comments' : 'show comments'
+        const {tr} = this.context
+        const actionText = isOpen ? tr('hideComments') : tr('showComments')
 
         return (
             <div>
