@@ -4,6 +4,8 @@ import { articlesStore, usersStore } from '../stores'
 import ArticleList from './ArticleList'
 import { loadAllArticles, createNewArticle } from './../actions/articles'
 import { login } from '../actions/user'
+import translate from "../i18n"
+console.log(translate("Login", "en"), translate("Login", "ru"))
 
 class Container extends Component {
     state = {
