@@ -16,5 +16,8 @@ export function createNewArticle() {
     history.replace('/new')
 }
 
+export function noAccessToCreate() {
+    history.push('/articles')
+}
 export const loadAllArticles = asyncAC(LOAD_ALL_ARICLES, loadAll)
 export const loadArticleById = asyncAC(LOAD_ARTICLE_BY_ID, loadById)
