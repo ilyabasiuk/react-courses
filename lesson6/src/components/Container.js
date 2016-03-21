@@ -11,7 +11,8 @@ class Container extends Component {
     state = {
         articles: articlesStore.getOrLoadAll(),
         loading: articlesStore.loading,
-        currentUser: usersStore.currentUser
+        currentUser: usersStore.currentUser,
+        lang: "en"
     }
 
     componentDidMount() {
@@ -35,10 +36,12 @@ class Container extends Component {
     }
 
     render() {
-        const { loading } = this.state
+        const { loading, lang } = this.state
         if (loading) return <h3>Loading...</h3>
         return (
             <div>
+                <a href= "#" className={lang=== "en" ? "selected" : ""} onClick = {this.setLang("en")}>En </a>
+                <a href= "#" className={lang=== "ru" ? "selected" : ""} onClick = {this.setLang("ru")}>Ru </a>
                 <a href = "#" onClick = {this.login}>Login</a>
                 {this.getMenu()}
                 {this.props.children}
@@ -50,7 +53,14 @@ class Container extends Component {
         ev.preventDefault()
         login()
     }
-
+    setLang(lang) {
+        return (ev) => {
+            ev.preventDefault();
+            this.setState({
+                lang: lang
+            })
+        }
+    }
     getMenu() {
         const links = this.state.articles.map((article) =>
             <li key={article.id}>
