@@ -1,3 +1,3 @@
 export default {
-    "Login" : "Sign in"
+    "Login" : "Sign in",
 }

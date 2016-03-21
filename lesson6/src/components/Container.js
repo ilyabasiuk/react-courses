@@ -5,7 +5,6 @@ import ArticleList from './ArticleList'
 import { loadAllArticles, createNewArticle } from './../actions/articles'
 import { login } from '../actions/user'
 import translate from "../i18n"
-console.log(translate("Login", "en"), translate("Login", "ru"))
 
 class Container extends Component {
     state = {
@@ -26,23 +25,28 @@ class Container extends Component {
     }
 
     static childContextTypes = {
-        user: PropTypes.string
+        user: PropTypes.string,
+        tr: PropTypes.func
     }
 
     getChildContext() {
+        const {currentUser} = this.state
         return {
-            user: this.state.currentUser
+            user: currentUser,
+            tr: this.tr
         }
     }
 
+    tr = (value) => translate(value, this.state.lang)
+
     render() {
         const { loading, lang } = this.state
-        if (loading) return <h3>Loading...</h3>
+        if (loading) return <h3>{this.tr("Loading")}...</h3>
         return (
             <div>
                 <a href= "#" className={lang=== "en" ? "selected" : ""} onClick = {this.setLang("en")}>En </a>
                 <a href= "#" className={lang=== "ru" ? "selected" : ""} onClick = {this.setLang("ru")}>Ru </a>
-                <a href = "#" onClick = {this.login}>Login</a>
+                <a href = "#" onClick = {this.login}>{this.tr("Login")}</a>
                 {this.getMenu()}
                 {this.props.children}
             </div>

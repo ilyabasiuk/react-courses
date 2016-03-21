@@ -1,3 +1,4 @@
 export default {
-    "Login" : "Войти"
+    "Login" : "Войти",
+    "Loading": "Грузимся"
 }
