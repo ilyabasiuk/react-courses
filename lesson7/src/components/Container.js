@@ -7,21 +7,11 @@ import { login } from '../actions/user'
 import dictionary from '../dictionary'
 
 class Container extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            articles: articlesStore.getOrLoadAll(),
-            language: props.params.lang,
-            loading: articlesStore.loading,
-            currentUser: usersStore.currentUser
-        }
-
-    }
-
-    componentWillReceiveProps(props) {
-        this.setState({
-            language: props.params.lang
-        })
+    state = {
+        articles: articlesStore.getOrLoadAll(),
+        language: 'en',
+        loading: articlesStore.loading,
+        currentUser: usersStore.currentUser
     }
 
     componentDidMount() {
@@ -48,14 +38,13 @@ class Container extends Component {
 
     render() {
         const { loading } = this.state
-        const route = this.props.location.pathname.split('/').slice(2).join('/')
         if (loading) return <h3>Loading...</h3>
         return (
             <div>
                 <a href = "#" onClick = {this.login}>Login</a>
                 <ul>
-                    <li><Link to={`/en/${route}`}>EN</Link></li>
-                    <li><Link to={`/ru/${route}`}>RU</Link></li>
+                    <li><a href="#" onClick = {this.changeLang('en')}>EN</a></li>
+                    <li><a href="#" onClick = {this.changeLang('ru')}>RU</a></li>
                 </ul>
                 {this.getMenu()}
                 {this.props.children}
@@ -74,10 +63,9 @@ class Container extends Component {
     }
 
     getMenu() {
-        const { articles, language } = this.state
-        const links = articles.map((article) =>
+        const links = this.state.articles.map((article) =>
             <li key={article.id}>
-                <Link to={`/${language}/articles/${article.id}`}
+                <Link to={`/articles/${article.id}`}
                     activeClassName = "active"
                     activeStyle = {{color: 'red'}}
                 >
