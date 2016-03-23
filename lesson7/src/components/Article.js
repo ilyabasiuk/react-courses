@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 //import CommentList from './CommentList'
+import { connect } from 'react-redux'
 import { deleteArticle } from './../actions/article'
 import translate from '../HOC/Translate'
 require('./../style.css')
@@ -45,8 +46,11 @@ class Article extends Component {
 
     handleDeleteArticle = (ev) => {
         ev.preventDefault()
-        deleteArticle(this.props.article.id)
+        this.props.deleteArticle(this.props.article.id)
     };
 }
 
-export default translate(Article)
+export default connect(null, {
+        deleteArticle
+    }
+)(translate(Article))
