@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { increment } from '../actions/counter'
 import { getRelation } from '../utils'
+import ArticleList from "../components/ArticleList"
 
 class AppContainer extends Component {
     static propTypes = {
@@ -14,7 +15,7 @@ class AppContainer extends Component {
         return (
             <div>
                 <h1 onClick={() => increment(10)}>{counter}</h1>
-                <ul>{this.getArticles()}</ul>
+                <ArticleList articles={articles}></ArticleList>
             </div>
         )
     }

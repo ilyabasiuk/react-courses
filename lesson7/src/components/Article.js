@@ -1,23 +1,15 @@
 import React, { Component, PropTypes } from 'react'
-import CommentList from './CommentList'
-import { deleteArticle } from './../actions/articles'
+//import CommentList from './CommentList'
+//import { deleteArticle } from './../actions/articles'
 import translate from '../HOC/Translate'
 require('./../style.css')
 
 class Article extends Component {
     static propTypes = {
         article: PropTypes.object,
-
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func
     };
-
-/*
-    shouldComponentUpdate(nextProps, nextState) {
-        console.log('---', arguments);
-        return this.props.article != nextProps.article
-    }
-*/
 
     render() {
         return (
@@ -45,7 +37,7 @@ class Article extends Component {
             <div key="article">
                 <a href="#" onClick = {this.handleDeleteArticle}>{translate('delete this article')}</a>
                 <p>{article.text}</p>
-                <CommentList article = {article}/>
+
             </div>
         )
     }
