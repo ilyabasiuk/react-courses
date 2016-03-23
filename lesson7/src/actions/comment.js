@@ -1,8 +1,10 @@
 import { ADD_COMMENT } from "./constants"
-export function addComment(data) {
-    console.log("add comment", data);
+export function addComment(text, articleId) {
     return {
         type: ADD_COMMENT,
-        data: data
+        data: {
+            text,
+            articleId
+        }
     }
 }
