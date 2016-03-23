@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import Comment from './Comment'
 import toggleOpen from './../HOC/toggleOpen'
-import { addComment, loadCommentsForArticle } from './../actions/comment'
+//import { addComment, loadCommentsForArticle } from './../actions/comment'
 import translate from '../HOC/Translate'
+import { getRelation } from '../utils'
 
 class CommentList extends Component {
     static propTypes = {
@@ -23,9 +24,9 @@ class CommentList extends Component {
 
     componentWillReceiveProps(newProps) {
         if (!newProps.isOpen || this.props.isOpen || this.checkComments(newProps)) return
-        loadCommentsForArticle({
-            articleId: newProps.article.id
-        })
+        //loadCommentsForArticle({
+        //    articleId: newProps.article.id
+        //})
     }
 
     render() {
@@ -45,7 +46,7 @@ class CommentList extends Component {
         const { article, isOpen, translate } = this.props
         if (!isOpen) return null
         if (!this.checkComments()) return <h3>{translate('loading')}...</h3>
-        const commentList = article.getRelation('comments').map(comment => <li key={comment.id}><Comment comment = {comment}/></li>)
+        const commentList = getRelation(article, 'comments').map(comment => <li key={comment.id}><Comment comment = {comment}/></li>)
         return (
             <div>
                 user: {this.context.user}
@@ -79,7 +80,7 @@ class CommentList extends Component {
 
     checkComments(props) {
         props = props || this.props
-        return !(props.article.getRelation('comments').includes(undefined))
+        return !(getRelation(props.article, 'comments').includes(undefined))
     }
 }
 

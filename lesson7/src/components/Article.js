@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-//import CommentList from './CommentList'
+import CommentList from './CommentList'
 import { connect } from 'react-redux'
 import { deleteArticle } from './../actions/article'
 import translate from '../HOC/Translate'
@@ -39,7 +39,7 @@ class Article extends Component {
             <div key="article">
                 <a href="#" onClick = {this.handleDeleteArticle}>{translate('delete this article')}</a>
                 <p>{article.body}</p>
-
+                <CommentList article = {article}/>
             </div>
         )
     }
