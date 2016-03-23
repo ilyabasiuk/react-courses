@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 //import CommentList from './CommentList'
-//import { deleteArticle } from './../actions/articles'
+import { deleteArticle } from './../actions/article'
 import translate from '../HOC/Translate'
 require('./../style.css')
 
