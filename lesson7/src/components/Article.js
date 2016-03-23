@@ -12,10 +12,11 @@ class Article extends Component {
     };
 
     render() {
+        const {isOpen} = this.props
         return (
             <div>
                 {this.getTitle()}
-                {this.getBody()}
+                {isOpen ? this.getBody(): null}
             </div>
         )
     }
@@ -36,7 +37,7 @@ class Article extends Component {
         return (
             <div key="article">
                 <a href="#" onClick = {this.handleDeleteArticle}>{translate('delete this article')}</a>
-                <p>{article.text}</p>
+                <p>{article.body}</p>
 
             </div>
         )
