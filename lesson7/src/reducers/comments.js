@@ -6,11 +6,8 @@ export default (comments = defaultComents, action) => {
 
     switch (type) {
         case ADD_COMMENT:
-            const comment = {
-                text: data.text,
-                id: Date.now()
-            }
-            return comments.concat(comment)
+            const {id, text} = data
+            return comments.concat({id, text})
     }
 
     return comments

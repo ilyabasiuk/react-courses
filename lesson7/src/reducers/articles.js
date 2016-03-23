@@ -9,10 +9,7 @@ export default (articles = defaultArticles, action) => {
         case ADD_COMMENT_TO_ARTICLE:
            return articles.map((article) => {
                 if (article.id === data.id) {
-                    console.log("!!!!")
-                    console.log(article)
                     article.comments = (article.comments || []).concat(data.commentId)
-                    console.log(article)
                 }
                 return article
             } )
