@@ -1,10 +1,19 @@
-import { ADD_COMMENT } from "./constants"
+import { ADD_COMMENT, ADD_COMMENT_TO_ARTICLE } from "./constants"
+
 export function addComment(text, articleId) {
-    return {
+    const id = Date.now()
+
+    return [{
         type: ADD_COMMENT,
         data: {
             text,
-            articleId
+            id
         }
-    }
+    }, {
+       type: ADD_COMMENT_TO_ARTICLE,
+       data: {
+           id: articleId,
+           commentId: id
+       }
+}]
 }
