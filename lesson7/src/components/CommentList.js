@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import Comment from './Comment'
 import toggleOpen from './../HOC/toggleOpen'
-//import { addComment, loadCommentsForArticle } from './../actions/comment'
+import { connect } from 'react-redux'
 import translate from '../HOC/Translate'
 import { getRelation } from '../utils'
+import { addComment } from '../actions/comment'
 
 class CommentList extends Component {
     static propTypes = {
@@ -65,7 +66,7 @@ class CommentList extends Component {
 
     submitComment = (ev) => {
         ev.preventDefault()
-        addComment(this.state.comment, this.props.article.id)
+        this.props.addComment(this.state.comment, this.props.article.id)
         this.setState({
             comment: ''
         })
@@ -84,4 +85,4 @@ class CommentList extends Component {
     }
 }
 
-export default translate(toggleOpen(CommentList))
+export default connect(null, {addComment} )(translate(toggleOpen(CommentList)))
