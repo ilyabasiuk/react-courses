@@ -9,6 +9,7 @@ export default (articles = defaultArticles, action) => {
         case ADD_COMMENT_TO_ARTICLE:
            return articles.map((article) => {
                 if (article.id === data.id) {
+                    //в общем решение очень хорошее. Но тут ты мутируешь article, это плохо
                     article.comments = (article.comments || []).concat(data.commentId)
                 }
                 return article
